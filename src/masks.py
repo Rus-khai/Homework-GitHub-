@@ -1,4 +1,3 @@
-import os
 
 
 def get_mask_card_number(card_number: [str, int]) -> str:
