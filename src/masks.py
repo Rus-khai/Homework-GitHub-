@@ -1,5 +1,3 @@
-
-
 def get_mask_card_number(card_number: [str, int]) -> str:
     """ "
     Функция get_mask_card_number принимает на вход номер карты и возвращает ее маску.
