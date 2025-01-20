@@ -7,4 +7,4 @@ def filter_by_state(list_dict: list, state='EXECUTED') -> list:
 
 
 def sort_by_date(dict_list_date: list) -> list:
-    return sorted(dict_list_date, key=lambda k: k['date'].split('.'), reverse=True)
+    return sorted(dict_list_date, key=lambda k: k['date'], reverse=True)
