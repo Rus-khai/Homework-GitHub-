@@ -7,6 +7,8 @@ def filter_by_state(list_of_data: Union[list], state: Union[str] = "EXECUTED") -
     state (по умолчанию 'EXECUTED'), и возвращает новый список словарей,
     у которых ключ state соответствует указанному значению
     """
+    if not isinstance(list_of_data, list):
+        raise TypeError("Не правильный тип данных")
     filter_data_list = []
     for data_dictionary in list_of_data:
         if data_dictionary["state"] == state:
@@ -14,10 +16,10 @@ def filter_by_state(list_of_data: Union[list], state: Union[str] = "EXECUTED") -
     return filter_data_list
 
 
-def sort_by_date(dict_list_date: Union[list]) -> Union[list]:
+def sort_by_date(dict_list_date: Union[list], direction=True) -> Union[list]:
     """
     Функция принимает список словарей и необязательный параметр,
     задающий порядок сортировки (по умолчанию — убывание),
     и возвращать новый список, отсортированный по дате (date)
     """
-    return sorted(dict_list_date, key=lambda k: k["date"], reverse=True)
+    return sorted(dict_list_date, key=lambda k: k["date"], reverse=direction)
