@@ -1,14 +1,14 @@
-from src.masks import get_mask_account, get_mask_card_number
+from typing import Any, Union
 
-from typing import Union, Any
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(info_card: Any) -> Any:
     """
     Функция принимает и обрабатывать информацию как о картах, так и о счетах и маскирует её
     """
-    number_card = ''
-    type_card = ''
+    number_card = ""
+    type_card = ""
 
     for symbol in info_card:
         if symbol.isdigit():
@@ -34,7 +34,7 @@ def get_date(date: Union[str]) -> Union[str]:
     """
 
     if not isinstance(date, str):
-        raise TypeError('Не правильный тип даты')
+        raise TypeError("Не правильный тип даты")
     if len(str(date)) < 1:
         raise ValueError("Не правильный формат даты")
     filter_date = str(date)[:10].split("-")
