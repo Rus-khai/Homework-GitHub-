@@ -1,7 +1,6 @@
 import pytest
 
-
-from src.masks import get_mask_card_number, get_mask_account
+from src.masks import get_mask_account, get_mask_card_number
 
 
 @pytest.fixture
@@ -16,7 +15,7 @@ def test_get_mask_card_number(number):
         get_mask_card_number([])
 
     with pytest.raises(ValueError, match="Не правильный номер карты"):
-        get_mask_card_number('')
+        get_mask_card_number("")
 
 
 @pytest.fixture
@@ -31,7 +30,7 @@ def test_get_mask_account(account):
         assert get_mask_account(736541084301358743051)
 
     with pytest.raises(ValueError, match="Не правильный номер счёта"):
-        get_mask_account('')
+        get_mask_account("")
 
     with pytest.raises(TypeError, match="Не правильный тип счёта"):
         get_mask_account([])
