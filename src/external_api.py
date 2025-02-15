@@ -13,6 +13,11 @@ code_RUB = 'RUB'
 
 
 def transaction_amount(transactions):
+    """
+    функция, которая принимает на вход транзакцию и возвращает сумму транзакции (amount) в рублях, тип данных —
+    float. Если транзакция была в USD или EUR, происходит обращение к внешнему API для получения текущего курса валют
+    и конвертации суммы операции в рубли.
+    """
     for transaction in transactions:
         if (transaction.get('operationAmount').get('currency').get('code') == 'USD' or
                 transaction.get('operationAmount').get('currency').get('code') == 'EUR'):
