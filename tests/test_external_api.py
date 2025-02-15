@@ -1,36 +1,49 @@
-import os
+from unittest.mock import patch
 
-import requests
-from dotenv import load_dotenv
-
-load_dotenv('.env')
+from src.external_api import transaction_amount
 
 
-API_KEY = os.getenv('API_KEY')
-payload = {}
-headers = {"apikey": API_KEY}
-code_RUB = 'RUB'
+@patch('requests.get')
+def test_transaction_amount(mock_get):
+    main_answer = [
+        {
+            "success": True,
+            "query": {
+                "from": "USD",
+                "to": "RUB",
+                "amount": 8221.37
+            },
+            "info": {
+                "timestamp": 1739607724,
+                "rate": 90.965376
+            },
+            "date": "2025-02-15",
+            "result": 747860.013285
+        }
 
+    ]
+    mock_get.return_value.json.return_value = main_answer
 
-def transaction_amount(transactions):
-    for transaction in transactions:
-        if (transaction.get('operationAmount').get('currency').get('code') == 'USD' or
-                transaction.get('operationAmount').get('currency').get('code') == 'EUR'):
-            url = (f"https://api.apilayer.com/exchangerates_data/convert?to="
-                   f"{code_RUB}&from="f"{transaction.get('operationAmount').get('currency').get('code')}&amount="
-                   f"{transaction.get('operationAmount').get('amount')}")
-            response = requests.request("GET", url, headers=headers)
-
-            result = response.text
-            return result
-        else:
-            result = transaction.get('operationAmount').get('amount')
-            return result
+    transaction_amount(data)
 
 
 data = \
         [
-
+            {
+                "id": 41428829,
+                "state": "EXECUTED",
+                "date": "2019-07-03T18:35:29.512364",
+                "operationAmount": {
+                    "amount": "8221.37",
+                    "currency": {
+                        "name": "USD",
+                        "code": "USD"
+                    }
+                },
+                "description": "Перевод организации",
+                "from": "MasterCard 7158300734726758",
+                "to": "Счет 35383033474447895560"
+            },
             {
                 "id": 939719570,
                 "state": "EXECUTED",
@@ -75,6 +88,3 @@ data = \
                 "from": "Счет 19708645243227258542",
                 "to": "Счет 75651667383060284188"
             }]
-
-
-print(transaction_amount(data))
