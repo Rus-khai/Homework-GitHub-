@@ -9,6 +9,7 @@ def log(filename=None):
     Декоратор принимает необязательный аргумент filename,
     который определяет, куда будут записываться логи (в файл или в консоль)
     """
+
     def inner(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -37,9 +38,9 @@ def log(filename=None):
     return inner
 
 
-@log(filename='mylog.txt')
+@log(filename="mylog.txt")
 def my_function(x, y):
-    """ Функция, принимает 2 числа, и возвращает их сумму """
+    """Функция, принимает 2 числа, и возвращает их сумму"""
     return x + y
 
 
