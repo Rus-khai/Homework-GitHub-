@@ -1,7 +1,17 @@
 import os
-
-import requests
 from dotenv import load_dotenv
+import requests
+
+
+import logging
+
+logger = logging.getLogger('external_api_log.py')
+logger.setLevel(logging.INFO)
+file_handler = logging.FileHandler('logs/external_api_log.log', mode='w')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
 
 load_dotenv('.env')
 
@@ -19,6 +29,7 @@ def transaction_amount(transactions):
     и конвертации суммы операции в рубли.
     """
     for transaction in transactions:
+        logger.info(f'Идет процесс фильтрации валюты в транзакциях')
         if (transaction.get('operationAmount').get('currency').get('code') == 'USD' or
                 transaction.get('operationAmount').get('currency').get('code') == 'EUR'):
             url = (f"https://api.apilayer.com/exchangerates_data/convert?to="
@@ -27,6 +38,7 @@ def transaction_amount(transactions):
             response = requests.request("GET", url, headers=headers)
 
             result = response.text
+            logger.info('Идет процесс вывода результата конвертации валюты')
             return result
         else:
             result = transaction.get('operationAmount').get('amount')
