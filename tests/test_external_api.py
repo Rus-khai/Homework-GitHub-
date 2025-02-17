@@ -16,6 +16,7 @@ def test_transaction_amount(mock_get):
 
     assert transaction_amount(data) == round(main_answer['result'], 2)
 
+
 data = {
         "id": 41428829,
         "state": "EXECUTED",

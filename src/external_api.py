@@ -1,12 +1,15 @@
 import os
+
 import requests
 from dotenv import load_dotenv
+
 load_dotenv('.env')
 
 API_KEY = os.getenv('API_KEY')
 payload = {}
 headers = {"apikey": API_KEY}
 code_RUB = 'RUB'
+
 
 def transaction_amount(transaction):
     """
@@ -22,10 +25,12 @@ def transaction_amount(transaction):
         response = requests.get(url, headers=headers)
 
         result = response.json()
-        return round(result.get('result'), 2)
+        return round(result.get("result"), 2)
     else:
         result = transaction.get('operationAmount').get('amount')
         return result
+
+
 data = {
         "id": 939719570,
         "state": "EXECUTED",
@@ -34,8 +39,7 @@ data = {
             "amount": "9824.07",
             "currency": {
                 "name": "USD",
-                "code": "USD"
-                        }
-                            }
+                "code": "USD"}
         }
+}
 print(transaction_amount(data))
