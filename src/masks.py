@@ -39,3 +39,5 @@ def get_mask_account(account_number: Union[str, int]) -> Union[str]:
         raise ValueError("Не правильный номер счёта")
     logger.info('Программа get_mask_account проверила правильность ввода номера счёта')
     return "**" + str(account_number)[-4:]
+
+get_mask_card_number(1234123412341234)

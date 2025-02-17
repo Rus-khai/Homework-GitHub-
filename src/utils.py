@@ -21,10 +21,12 @@ def financial_transactions(file_path):
             logger.info('Идет проверка на правильность тип данных')
             if isinstance(data, list):
                 return data
+            else:
+                return []
     except (FileNotFoundError, json.JSONDecodeError):
         logger.error('Ошибка: FileNotFoundError')
         return []
-    logger.info('Программа financial_transactions завершила работу')
+logger.info('Программа financial_transactions завершила работу')
 
 
 print(financial_transactions('data/operations.json'))
