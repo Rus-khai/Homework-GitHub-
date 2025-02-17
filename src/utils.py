@@ -5,12 +5,13 @@ def financial_transactions(file_path):
     """ функция, которая принимает на вход путь до JSON-файла и
     возвращает список словарей с данными о финансовых транзакциях
     """
-    with open(file_path, encoding='utf-8') as json_file:
-        data_1 = json.load(json_file)
-    if not isinstance(data_1, list) or len(data_1) == 0 or len(data_1[0]) == 0:
+    try:
+        with open(file_path, encoding='utf-8') as json_file:
+            data = json.load(json_file)
+            if isinstance(data, list):
+                return data
+    except (FileNotFoundError, json.JSONDecodeError):
         return []
-    else:
-        return data_1
 
 
-financial_transactions('../data/operations.json')
+print(financial_transactions('../data/operations.json'))
