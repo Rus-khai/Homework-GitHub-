@@ -26,7 +26,7 @@ def financial_transactions(file_path):
     except (FileNotFoundError, json.JSONDecodeError):
         logger.error('Ошибка: FileNotFoundError')
         return []
+
+
 logger.info('Программа financial_transactions завершила работу')
-
-
 print(financial_transactions('data/operations.json'))
