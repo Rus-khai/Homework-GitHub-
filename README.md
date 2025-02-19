@@ -49,7 +49,7 @@ git clone https://github.com/Rus-khai/Homework-GitHub-.git
 
 #### Модуль **test_widget.py:**
 #### Модуль **test_processing.py:**
-#### Модуль **test_masks.py:**
+#### Модуль **test_masks.py:**пш
 #### Модуль **test_generators.py:**
 #### Модуль **test_decorators.py:**
 
