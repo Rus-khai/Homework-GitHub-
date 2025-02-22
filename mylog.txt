@@ -165,3 +165,23 @@ my_function ok
 my_function ok
 my_function error TypeError. Inputs: (1, 'fff'), {}
 my_function ok
+my_function ok
+my_function ok
+my_function ok
+my_function ok
+my_function ok
+my_function ok
+my_function error TypeError. Inputs: (1, 'fff'), {}
+my_function ok
+my_function ok
+my_function error TypeError. Inputs: (1, 'fff'), {}
+my_function ok
+my_function ok
+my_function ok
+my_function error TypeError. Inputs: (1, 'fff'), {}
+my_function ok
+my_function ok
+my_function error TypeError. Inputs: (1, 'fff'), {}
+my_function ok
+my_function ok
+my_function error TypeError. Inputs: (1, 'fff'), {}
