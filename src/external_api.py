@@ -25,7 +25,7 @@ def transaction_amount(transaction):
         response = requests.get(url, headers=headers)
 
         result = response.json()
-        return round(result.get("result"), 2)
+        return round(result.get("result", 0), 2)
     else:
         result = transaction.get('operationAmount').get('amount')
         return result
