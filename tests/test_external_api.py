@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from src.external_api import transaction_amount
+import src.external_api
 
 
 @patch('requests.get')
@@ -14,7 +14,7 @@ def test_transaction_amount(mock_get):
                   }
     mock_get.return_value.json.return_value = main_answer
 
-    assert transaction_amount(data) == round(main_answer['result'], 2)
+    assert src.external_api.transaction_amount(data) == round(main_answer.get("result", 0), 2)
 
 
 data = {
