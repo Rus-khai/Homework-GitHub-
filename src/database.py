@@ -1,3 +1,4 @@
+import csv
 from typing import Any
 
 import pandas as pd
@@ -5,13 +6,15 @@ import pandas as pd
 
 def read_transaction_csv(base_date: Any):
     """Функция считывает csv.file и выводит список словарей с транзакциями"""
-    df = pd.read_csv(base_date, delimiter=';')
-    transactions_csv = df.to_dict(orient='records')
-    return transactions_csv
-
+    with open(base_date, encoding='utf-8') as file:
+        reader_data_csv = csv.DictReader(file, delimiter=';')
+        result_list = []
+        for data in reader_data_csv:
+            result_list.append(data)
+    return result_list
 
 base_date = 'data/transactions.csv'
-print(read_transaction_csv(base_date))
+read_transaction_csv(base_date)
 
 
 def read_transaction_excel(base_excel: Any):
