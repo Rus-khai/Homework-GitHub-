@@ -1,28 +1,32 @@
 import csv
+
 from typing import Any
 
 import pandas as pd
+import os
+from config import DATA_DIR
+file_path_csv = os.path.join(DATA_DIR, 'transaction.csv')
+file_path_excel = os.path.join(DATA_DIR, 'transactions_excel.xlsx')
 
-
-def read_transaction_csv(base_date: Any):
+def read_transaction_csv(base_date_1: Any):
     """Функция считывает csv.file и выводит список словарей с транзакциями"""
-    with open(base_date, encoding='utf-8') as file:
+    with open(base_date_1, encoding='utf-8') as file:
         reader_data_csv = csv.DictReader(file, delimiter=';')
         result_list = []
         for data in reader_data_csv:
             result_list.append(data)
     return result_list
 
-base_date = 'data/transactions.csv'
-read_transaction_csv(base_date)
+
+# read_transaction_csv(file_path_csv)
 
 
-def read_transaction_excel(base_excel: Any):
+def read_transaction_excel(file_path_excel: Any):
     """Функция считывает excel.file и выводит список словарей с транзакциями"""
-    df = pd.read_excel(base_excel)
-    transactions_excel = df.to_dict(orient='records')
-    return transactions_excel
+    reader_data_excel = pd.read_excel(file_path_excel)
+    result = reader_data_excel.to_dict(orient='records')
+    return result
 
 
-base_excel = 'data/transactions_excel.xlsx'
-read_transaction_excel(base_excel)
+
+# read_transaction_excel('data/transactions_excel.xlsx')

@@ -1,5 +1,5 @@
 import re
-from database import read_transaction_csv
+
 from collections import Counter
 
 
@@ -29,11 +29,3 @@ def quantity_transactions(list_transaction_dict, categories):
     counter = Counter(descriptions)
     result_dict = {categories: counter[categories]}
     return result_dict
-
-
-
-
-
-if __name__ == '__main__':
-    base_date = 'data/transactions.csv'
-    print(quantity_transactions(read_transaction_csv(base_date), 'Открытие вклада'))

@@ -11,7 +11,7 @@ def filter_by_state(list_of_data: Union[list], state: Union[str] = "EXECUTED") -
         raise TypeError("Не правильный тип данных")
     filter_data_list = []
     for data_dictionary in list_of_data:
-        if data_dictionary["state"] == state:
+        if data_dictionary.get("state",0) == state:
             filter_data_list.append(data_dictionary)
     return filter_data_list
 
@@ -23,3 +23,12 @@ def sort_by_date(dict_list_date: Union[list], direction=True) -> Union[list]:
     и возвращать новый список, отсортированный по дате (date)
     """
     return sorted(dict_list_date, key=lambda k: k["date"], reverse=direction)
+
+def filter_by_currency(list_transaction):
+    if not isinstance(list_transaction, list):
+        raise TypeError("Не правильный тип данных")
+    filter_data_list = []
+    for list_transaction in list_transaction:
+        if list_transaction.get('operationAmount').get('currency').get('code') == 'RUB':
+            filter_data_list.append(list_transaction)
+    return filter_data_list
