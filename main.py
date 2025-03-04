@@ -1,6 +1,6 @@
 from src.utils import financial_transactions
 from src.database import read_transaction_csv, read_transaction_excel
-from src.processing import filter_by_state, sort_by_date, filter_by_currency
+from src.processing import filter_by_state, sort_by_date, filter_by_currency, filter_by_currency_for_csv
 from src.search import search_description
 
 
@@ -25,27 +25,23 @@ else:
 print('''Введите статус, по которому необходимо выполнить фильтрацию.
 Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING''')
 
-user_input_filter = str(input('Пользователь: ').upper())
+user_input_filter = str(input('Пользователь:').upper())
 if user_input_filter == 'EXECUTED' or user_input_filter == 'CANCELED' or user_input_filter == 'PENDING':
     print(f'Операции отфильтрованы по статусу "{user_input_filter}"')
 else:
     print(f"Статус операции \"{user_input_filter}\" недоступен.")
 
 print('Отсортировать операции по дате? Да/Нет')
-user_sorted_date = str(input('Пользователь: ').lower())
+user_sorted_date = str(input('Пользователь:').lower())
 if user_sorted_date == 'да':
     print('Отсортировать по возрастанию или по убыванию?')
-    user_sorted_INCREASING = str(input('Пользователь: ').lower())
-
-
-
-
+    user_sorted_INCREASING = str(input('Пользователь:').lower())
 print('Выводить только рублевые транзакции? Да/Нет')
 user_sorted_currency = str(input('Пользователь: ').lower())
 print('Отфильтровать список транзакций по определенному слову в описании? Да/Нет')
 user_filter_list_transactions = str(input('Пользователь: ').lower())
 if user_filter_list_transactions == 'да':
-    user_filter_list_transactions_1 = str(input('Введите ключевое слово: ').lower())
+    user_filter_list_transactions_1 = str(input('Введите ключевое слово:').lower())
 elif user_filter_list_transactions == 'нет':
     print('Распечатываю итоговый список транзакций...')
 
@@ -62,15 +58,13 @@ def main():
                     if user_sorted_currency == 'да':
                         result_filter_by_currency = filter_by_currency(result_sort_by_date)
                         if user_filter_list_transactions == 'да':
-                            result_search_description = search_description(result_filter_by_currency,
-                                                                           user_filter_list_transactions_1)
+                            result_search_description = search_description(result_filter_by_currency, user_filter_list_transactions_1)
                             return result_search_description
                         else:
                             return result_filter_by_currency
                     elif user_sorted_currency == 'нет':
                         if user_filter_list_transactions == 'да':
-                            result_search_description = search_description(result_filter_by_state,
-                                                                           user_filter_list_transactions_1)
+                            result_search_description = search_description(result_filter_by_state, user_filter_list_transactions_1)
                             return result_search_description
                     elif user_filter_list_transactions == 'нет':
                         return result_filter_by_state
@@ -78,7 +72,6 @@ def main():
             elif user_sorted_date == 'нет':
                 if user_sorted_currency == 'да':
                     result_filter_by_currency = filter_by_currency(result_filter_by_state)
-                    print(result_filter_by_currency)
                     if user_filter_list_transactions == 'да':
                         result_search_description = search_description(result_filter_by_currency,
                                                                        user_filter_list_transactions_1)
@@ -101,7 +94,7 @@ def main():
                 if user_sorted_INCREASING == 'по убыванию':
                     result_sort_by_date = sort_by_date(result_filter_by_state, True)
                     if user_sorted_currency == 'да':
-                        result_filter_by_currency = filter_by_currency(result_sort_by_date)
+                        result_filter_by_currency = filter_by_currency_for_csv(result_sort_by_date)
                         if user_filter_list_transactions == 'да':
                             result_search_description = search_description(result_filter_by_currency,
                                                                            user_filter_list_transactions_1)
@@ -118,8 +111,7 @@ def main():
 
             elif user_sorted_date == 'нет':
                 if user_sorted_currency == 'да':
-                    result_filter_by_currency = filter_by_currency(result_filter_by_state)
-                    print(result_filter_by_currency)
+                    result_filter_by_currency = filter_by_currency_for_csv(result_filter_by_state)
                     if user_filter_list_transactions == 'да':
                         result_search_description = search_description(result_filter_by_currency,
                                                                        user_filter_list_transactions_1)
@@ -143,7 +135,7 @@ def main():
                 if user_sorted_INCREASING == 'по убыванию':
                     result_sort_by_date = sort_by_date(result_filter_by_state, True)
                     if user_sorted_currency == 'да':
-                        result_filter_by_currency = filter_by_currency(result_sort_by_date)
+                        result_filter_by_currency = filter_by_currency_for_csv(result_sort_by_date)
                         if user_filter_list_transactions == 'да':
                             result_search_description = search_description(result_filter_by_currency,
                                                                            user_filter_list_transactions_1)
@@ -160,8 +152,7 @@ def main():
 
             elif user_sorted_date == 'нет':
                 if user_sorted_currency == 'да':
-                    result_filter_by_currency = filter_by_currency(result_filter_by_state)
-                    print(result_filter_by_currency)
+                    result_filter_by_currency = filter_by_currency_for_csv(result_filter_by_state)
                     if user_filter_list_transactions == 'да':
                         result_search_description = search_description(result_filter_by_currency,
                                                                        user_filter_list_transactions_1)

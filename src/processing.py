@@ -24,11 +24,20 @@ def sort_by_date(dict_list_date: Union[list], direction=True) -> Union[list]:
     """
     return sorted(dict_list_date, key=lambda k: k["date"], reverse=direction)
 
-def filter_by_currency(list_transaction):
-    if not isinstance(list_transaction, list):
+def filter_by_currency(list_transactions):
+    if not isinstance(list_transactions, list):
         raise TypeError("Не правильный тип данных")
     filter_data_list = []
-    for list_transaction in list_transaction:
+    for list_transaction in list_transactions:
         if list_transaction.get('operationAmount').get('currency').get('code') == 'RUB':
+            filter_data_list.append(list_transaction)
+    return filter_data_list
+
+def filter_by_currency_for_csv(list_transactions):
+    if not isinstance(list_transactions, list):
+        raise TypeError("Не правильный тип данных")
+    filter_data_list = []
+    for list_transaction in list_transactions:
+        if list_transaction.get('currency_code') == 'RUB':
             filter_data_list.append(list_transaction)
     return filter_data_list
