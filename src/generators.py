@@ -14,11 +14,6 @@ def filter_by_currency(transactions_1, nam="USD"):
     yield list(var)
 
 
-usd_transactions = filter_by_currency(transactions, "USD")
-for x in filter_by_currency(transactions, "USD"):
-    print(next(usd_transactions))
-
-
 def transaction_descriptions(transactions_1):
     """
     Функция, которая принимает список словарей с транзакциями и возвращает описание каждой операции по очереди
@@ -27,11 +22,6 @@ def transaction_descriptions(transactions_1):
         raise ValueError("Нет значений в списке")
     for transaction in transactions_1:
         yield transaction.get("description", [])
-
-
-descriptions = transaction_descriptions(transactions)
-for x in transaction_descriptions(transactions):
-    print(next(descriptions))
 
 
 def card_number_generator(start, stop):
@@ -50,6 +40,3 @@ def card_number_generator(start, stop):
 result = card_number_generator(1, 90000)
 for card_number in card_number_generator(1, 6):
     print(next(result))
-
-
-

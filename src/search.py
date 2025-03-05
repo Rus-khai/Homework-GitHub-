@@ -1,14 +1,17 @@
 import re
-
 from collections import Counter
 
 
 def search_description(list_transaction_dict, str_search):
+    """
+    функция принимает список словарей с данными о банковских операциях и строку поиска,
+    а возвращает список словарей, у которых в описании есть данная строка
+    """
     result_list_transaction = []
     pattern = re.compile(str_search)
     try:
         for transaction in list_transaction_dict:
-            result = re.search(pattern, transaction.get('description', 'Перевод с карты на карту'))
+            result = re.search(pattern, transaction.get('description').lower())
             if result:
                 result_list_transaction.append(transaction)
     except Exception as e:
@@ -19,12 +22,12 @@ def search_description(list_transaction_dict, str_search):
         return 'Операции не найдены'
 
 
-
-# if __name__ == '__main__':
-#     base_date = 'data/transactions.csv'
-#     print(search_description(read_transaction_csv(base_date), 'счет'))
-
 def quantity_transactions(list_transaction_dict, categories):
+    """
+    функция принимает список словарей с данными о банковских операциях и список категорий операций,
+    а возвращает словарь, в котором ключи — это названия категорий,
+    а значения — это количество операций в каждой категории.
+    """
     descriptions = [transaction['description'] for transaction in list_transaction_dict]
     counter = Counter(descriptions)
     result_dict = {categories: counter[categories]}
