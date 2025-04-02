@@ -1,10 +1,9 @@
 import re
-from collections import Counter
 
 
 def search_description(list_transaction_dict, str_search):
     """
-    функция принимает список словарей с данными о банковских операциях и строку поиска,
+    Функция принимает список словарей с данными о банковских операциях и строку поиска,
     а возвращает список словарей, у которых в описании есть данная строка
     """
     result_list_transaction = []
@@ -22,13 +21,17 @@ def search_description(list_transaction_dict, str_search):
         return 'Операции не найдены'
 
 
-def quantity_transactions(list_transaction_dict, categories):
+def quantity_transactions(list_transaction_dict, categories: list):
     """
-    функция принимает список словарей с данными о банковских операциях и список категорий операций,
+    Функция принимает список словарей с данными о банковских операциях и список категорий операций,
     а возвращает словарь, в котором ключи — это названия категорий,
     а значения — это количество операций в каждой категории.
     """
-    descriptions = [transaction['description'] for transaction in list_transaction_dict]
-    counter = Counter(descriptions)
-    result_dict = {categories: counter[categories]}
-    return result_dict
+    transaction_dict = {}
+    for category in categories:
+        counter = 0
+        for transaction in list_transaction_dict:
+            if category == transaction['description']:
+                counter += 1
+                transaction_dict[category] = counter
+    return transaction_dict
