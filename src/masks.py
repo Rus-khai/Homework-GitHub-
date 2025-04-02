@@ -18,7 +18,7 @@ def get_mask_card_number(card_number: Union[str, int]) -> Any:
     if not isinstance(card_number, (str, int)):
         logger.error('Был введён не правильный номер карты')
         raise TypeError("Не правильный тип номера карты")
-    if len(str(card_number)) > 16 or len(str(card_number)) < 16 or len(str(card_number)) == 0:
+    if len(card_number) > 16 > len(card_number):
         logger.error('Был введён не правильное количество цифр номера карты')
         raise ValueError("Не правильный номер карты")
     logger.info('Программа get_mask_card_number проверила правильность ввода номера карты')
@@ -39,6 +39,3 @@ def get_mask_account(account_number: Union[str, int]) -> Union[str]:
         raise ValueError("Не правильный номер счёта")
     logger.info('Программа get_mask_account проверила правильность ввода номера счёта')
     return "**" + str(account_number)[-4:]
-
-
-get_mask_card_number(1234123412341234)

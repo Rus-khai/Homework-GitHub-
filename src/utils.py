@@ -29,4 +29,3 @@ def financial_transactions(file_path):
 
 
 logger.info('Программа financial_transactions завершила работу')
-print(financial_transactions('data/operations.json'))

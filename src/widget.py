@@ -5,11 +5,10 @@ from src.masks import get_mask_account, get_mask_card_number
 
 def mask_account_card(info_card: Any) -> Any:
     """
-    Функция принимает и обрабатывать информацию как о картах, так и о счетах и маскирует её
+    Функция принимает и обрабатывает информацию как о картах, так и о счетах и маскирует её
     """
     number_card = ""
     type_card = ""
-
     for symbol in info_card:
         if symbol.isdigit():
             break
